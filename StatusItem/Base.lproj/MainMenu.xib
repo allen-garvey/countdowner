@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14A389" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="Voe-Tx-rLC" id="GzC-gU-4Uq"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
+            <connections>
+                <outlet property="aboutWindow" destination="zQo-Mf-Bs2" id="6qY-z5-Mhw"/>
+                <outlet property="countdownLabel" destination="82U-CT-hcz" id="5le-FJ-x9x"/>
+                <outlet property="countdownWindow" destination="B2g-ld-16i" id="Xbk-k8-m2O"/>
+                <outlet property="editDateField" destination="17c-Bs-ZVt" id="LfR-wj-jf5"/>
+                <outlet property="endMessageTextField" destination="0NV-dt-iba" id="uSa-qm-50b"/>
+                <outlet property="menu" destination="Mx8-bz-P72" id="Pwj-AT-Xkt"/>
+                <outlet property="preferencesWindow" destination="cON-xw-JXL" id="BLw-AF-NJi"/>
+                <outlet property="timerText" destination="WPy-dl-laL" id="b0f-rD-tdm"/>
+            </connections>
+        </customObject>
+        <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+        <menu id="Mx8-bz-P72">
+            <items>
+                <menuItem title="Countdown" id="WPy-dl-laL">
+                    <attributedString key="attributedTitle"/>
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem title="Detail Window" id="4CT-YP-Iae">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="launchDetailWindow:" target="Voe-Tx-rLC" id="FqO-x9-uPD"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Preferences..." id="0jD-JS-sP4">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="editEndDate:" target="Voe-Tx-rLC" id="zuM-C6-v76"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="About Countdower" id="CnF-69-6i1">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="launchAboutWindow:" target="Voe-Tx-rLC" id="8Ag-gp-rb9"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Quit" id="bMP-99-4sz">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="quit:" target="Voe-Tx-rLC" id="v9w-KF-YKS"/>
+                    </connections>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="495" y="253.5"/>
+        </menu>
+        <window title="Countdowner Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="cON-xw-JXL">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="410" y="267" width="304" height="269"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="6vY-Mo-CMa">
+                <rect key="frame" x="0.0" y="0.0" width="304" height="269"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17c-Bs-ZVt">
+                        <rect key="frame" x="66" y="186" width="175" height="27"/>
+                        <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="AUq-0z-LlI">
+                            <font key="font" metaFont="system"/>
+                            <date key="date" timeIntervalSinceReferenceDate="-31510800">
+                                <!--2000-01-02 07:00:00 +0000-->
+                            </date>
+                            <date key="minDate" timeIntervalSinceReferenceDate="-978282000">
+                                <!--1970-01-01 07:00:00 +0000-->
+                            </date>
+                            <date key="maxDate" timeIntervalSinceReferenceDate="2493010800">
+                                <!--2080-01-01 07:00:00 +0000-->
+                            </date>
+                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES"/>
+                        </datePickerCell>
+                    </datePicker>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aPU-OM-qQm">
+                        <rect key="frame" x="63" y="223" width="178" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Countdown End Date " id="9CV-LY-NI1">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JTG-gS-3AY">
+                        <rect key="frame" x="208" y="35" width="82" height="32"/>
+                        <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AWV-ph-65C">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="updateButtonAction:" target="Voe-Tx-rLC" id="56n-Rc-C8h"/>
+                        </connections>
+                    </button>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XD8-HG-y3P">
+                        <rect key="frame" x="109" y="134" width="86" height="17"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="End Message" id="I4x-2H-8cR">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0NV-dt-iba">
+                        <rect key="frame" x="66" y="100" width="172" height="22"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="nfV-7y-1mm">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ii6-Ee-HF6">
+                        <rect key="frame" x="14" y="35" width="82" height="32"/>
+                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QNk-ar-Npu">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="cancelButtonAction:" target="Voe-Tx-rLC" id="hqJ-sP-ePB"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+        </window>
+        <window title="Countdowner" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="B2g-ld-16i">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="699" y="292" width="306" height="91"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <value key="minSize" type="size" width="306" height="270"/>
+            <view key="contentView" id="7Im-Lw-apk">
+                <rect key="frame" x="0.0" y="0.0" width="306" height="91"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82U-CT-hcz">
+                        <rect key="frame" x="17" y="16" width="471" height="234"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="60 Seconds" id="awO-8j-Xyd">
+                            <font key="font" metaFont="system" size="46"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="82U-CT-hcz" secondAttribute="bottom" constant="16" id="07f-ym-f8l"/>
+                    <constraint firstItem="82U-CT-hcz" firstAttribute="leading" secondItem="7Im-Lw-apk" secondAttribute="leading" constant="20" id="KQE-Vb-5cG"/>
+                    <constraint firstItem="82U-CT-hcz" firstAttribute="top" secondItem="7Im-Lw-apk" secondAttribute="top" constant="20" id="oAU-xg-aYl"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="118" y="266.5"/>
+        </window>
+        <window title="About Countdowner" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="zQo-Mf-Bs2">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="222" y="335" width="369" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <view key="contentView" id="hbs-tp-etq">
+                <rect key="frame" x="0.0" y="0.0" width="369" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dq4-GM-Ml6">
+                        <rect key="frame" x="-20" y="-6" width="408" height="300"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" drawsBackground="YES" id="28o-iq-Ueq">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pku-Pg-Mob">
+                        <rect key="frame" x="30" y="132" width="309" height="65"/>
+                        <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" alignment="center" title="Countdowner ® 2014 Allen Garvey" id="5lE-oz-NgG">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fyi-22-LNB">
+                        <rect key="frame" x="42" y="77" width="297" height="47"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="allen@allengarvey.com" id="G26-dQ-oYP">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+        </window>
+    </objects>
+</document>
