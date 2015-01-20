@@ -60,7 +60,9 @@
 		now = nil;
 		
 		if(intTotalSeconds <= 0){
-			[_timer invalidate];
+			if (_timer) {
+				[_timer invalidate];
+			}
 			return _endMessage;
 		}
 		else{
