@@ -25,7 +25,10 @@
 {
 	//sets up status bar appearance
 	statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-	statusItem.button.title = @"Ω";
+//	statusItem.button.title = @"Ω"; //can be used instead of image
+	NSImage *statusbarIcon = [NSImage imageNamed:@"StatusbarIcon"];
+	[statusbarIcon setTemplate:YES]; //so that dark mode will work correctly
+	statusItem.button.image = statusbarIcon;
 	statusItem.menu = self.menu;
 	statusItem.highlightMode = YES;
 	

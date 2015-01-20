@@ -60,7 +60,6 @@
 -(void)displayTimer:(NSTimer*)t
 {
 	[_delegate updateTimeDisplays:[self timeLeft:t]];
-	NSLog(@"Timer updated");
 }
 
 -(NSDate *) defaultEndDate
