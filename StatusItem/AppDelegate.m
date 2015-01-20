@@ -42,17 +42,24 @@
 		[self savePreferencesDictionaryToFile:[_counter endDate] message:[_counter endMessage]];
 	}
 	
-	[_counter setTimerLabel:self.timerText];
-	[_counter setCountdownLabel:self.countdownLabel];
+	[_counter setDelegate:self];
 	[_counter displayTimer:nil]; //used so that display is not blank for first second before timer kicks in
 	__unused NSTimer *countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:_counter selector:@selector(displayTimer:) userInfo:nil repeats:true];
 	[_countdownWindow setBackgroundColor:[NSColor whiteColor]];
 	
 }
 
+#pragma mark - AGEDCountdowner Delegate Method
+
+-(void)updateTimeDisplays:(NSString *)timeLeft{
+	[_timerText setTitle:timeLeft];
+	[_countdownLabel setStringValue:timeLeft];
+}
+
 #pragma mark - Button Action Methods
 
 - (IBAction)updateButtonAction:(id)sender {
+	[[_counter timer] invalidate];
 	[_counter setEndDate:_editDateField.dateValue];
 	[_counter setEndMessage:_endMessageTextField.stringValue];
 	__unused NSTimer *countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:_counter selector:@selector(displayTimer:) userInfo:nil repeats:true];

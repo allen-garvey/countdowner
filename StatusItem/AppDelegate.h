@@ -10,7 +10,7 @@
 #import "AGEDCountdowner.h"
 
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, AGEDCountdownerDelegate>
 
 @property (assign) IBOutlet NSWindow *window; //deleting this breaks the build for some reason
 
@@ -29,7 +29,7 @@
 @property (unsafe_unretained) IBOutlet NSWindow *aboutWindow;
 
 @property (weak) IBOutlet NSTextField *endMessageTextField;
-
+-(void)updateTimeDisplays:(NSString *)timeLeft;
 
 
 @end

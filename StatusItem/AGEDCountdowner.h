@@ -7,18 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+@protocol AGEDCountdownerDelegate
+
+-(void)updateTimeDisplays:(NSString *)timeLeft;
+
+@end
 
 @interface AGEDCountdowner : NSObject
 
-//used as method for selector in nstimer
 -(void) displayTimer: (NSTimer *)t;
 
--(NSString*) timeLeft:(NSTimer *)t;
-
-@property (weak, nonatomic) IBOutlet NSMenuItem *timerLabel;
 @property (strong, nonatomic) NSDate *endDate;
 @property (weak, nonatomic) NSTimer *timer;
-@property (weak, nonatomic) IBOutlet NSTextField *countdownLabel;
 @property (strong, nonatomic) NSString *endMessage;
+@property (strong, nonatomic) id<AGEDCountdownerDelegate> delegate;
 
 @end
+
+
+
+

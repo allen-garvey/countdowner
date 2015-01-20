@@ -24,7 +24,7 @@
 {
 	@autoreleasepool {
 		
-		t = _timer;
+		_timer = t;
 		
 		int MINUTE = 60;
 		int HOUR = MINUTE * 60;
@@ -36,11 +36,8 @@
 		now = nil;
 		
 		if(intTotalSeconds <= 0){
-			if (t != nil) {
-				[t invalidate];
-			}
+			[_timer invalidate];
 			return _endMessage;
-			
 		}
 		else{
 			int daysLeft = intTotalSeconds / DAY;
@@ -62,8 +59,8 @@
 }
 -(void)displayTimer:(NSTimer*)t
 {
-	[self.timerLabel setTitle:[self timeLeft:t]];
-	[self.countdownLabel setStringValue:[self timeLeft:t]];
+	[_delegate updateTimeDisplays:[self timeLeft:t]];
+	NSLog(@"Timer updated");
 }
 
 -(NSDate *) defaultEndDate
