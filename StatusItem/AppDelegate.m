@@ -108,7 +108,7 @@
 }
 - (IBAction)launchAboutWindow:(id)sender {
 	[_aboutWindow setIsVisible:YES];
-	[_countdownWindow makeMainWindow];
+	[_aboutWindow makeMainWindow];
 }
 
 

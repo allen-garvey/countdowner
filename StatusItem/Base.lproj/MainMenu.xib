@@ -43,7 +43,7 @@
                         <action selector="editEndDate:" target="Voe-Tx-rLC" id="zuM-C6-v76"/>
                     </connections>
                 </menuItem>
-                <menuItem title="About Countdower" id="CnF-69-6i1">
+                <menuItem title="About Countdowner" id="CnF-69-6i1">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="launchAboutWindow:" target="Voe-Tx-rLC" id="8Ag-gp-rb9"/>
@@ -56,7 +56,7 @@
                     </connections>
                 </menuItem>
             </items>
-            <point key="canvasLocation" x="495" y="253.5"/>
+            <point key="canvasLocation" x="379" y="44.5"/>
         </menu>
         <window title="Countdowner Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="cON-xw-JXL">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
@@ -165,14 +165,14 @@ Gw
         <window title="About Countdowner" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="zQo-Mf-Bs2">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="222" y="335" width="369" height="270"/>
+            <rect key="contentRect" x="222" y="335" width="369" height="243"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
             <view key="contentView" id="hbs-tp-etq">
-                <rect key="frame" x="0.0" y="0.0" width="369" height="270"/>
+                <rect key="frame" x="0.0" y="0.0" width="369" height="243"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dq4-GM-Ml6">
-                        <rect key="frame" x="-20" y="-6" width="408" height="300"/>
+                        <rect key="frame" x="-20" y="-33" width="408" height="300"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" drawsBackground="YES" id="28o-iq-Ueq">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -180,23 +180,24 @@ Gw
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pku-Pg-Mob">
-                        <rect key="frame" x="30" y="132" width="309" height="65"/>
-                        <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" alignment="center" title="Countdowner ® 2014 Allen Garvey" id="5lE-oz-NgG">
+                        <rect key="frame" x="56" y="132" width="295" height="38"/>
+                        <textFieldCell key="cell" lineBreakMode="charWrapping" sendsActionOnEndEditing="YES" alignment="left" title="Countdowner ® 2015 Allen Garvey" id="5lE-oz-NgG">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fyi-22-LNB">
-                        <rect key="frame" x="42" y="77" width="297" height="47"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="allen@allengarvey.com" id="G26-dQ-oYP">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wGM-pQ-II5">
+                        <rect key="frame" x="56" y="97" width="295" height="28"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Released under the MIT License" id="4hw-Cn-bEM">
                             <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="614.5" y="694.5"/>
         </window>
     </objects>
 </document>
