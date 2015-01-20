@@ -14,8 +14,8 @@
 {
 	self =[super init];
 	if(self) {
-		[self initDefaultEndDate];
-		[self setEndMessage:[self getDefaultEndMessage]];
+		[self setEndDate:[self defaultEndDate]];
+		[self setEndMessage:[self defaultEndMessage]];
 	}
 	return self;
 }
@@ -56,10 +56,8 @@
 			NSString *secondString = secondsLeft == 1 ? @"Second" : @"Seconds";
 			
 			
-			return [NSString stringWithFormat:@"%@ %@\n%@ %@\n%@ %@\n%@ %@", [self intFormat: daysLeft], dayString, [self intFormat: hoursLeft], hourString, [self intFormat: minutesLeft], minuteString, [self intFormat: secondsLeft], secondString];
-			
-		}
-		
+			return [NSString stringWithFormat:@"%02d %@\n%02d %@\n%02d %@\n%02d %@",  daysLeft, dayString, hoursLeft, hourString, minutesLeft, minuteString, secondsLeft, secondString];
+		}		
 	}
 }
 -(void)displayTimer:(NSTimer*)t
@@ -68,41 +66,14 @@
 	[self.countdownLabel setStringValue:[self timeLeft:t]];
 }
 
--(void)displayTimer
+-(NSDate *) defaultEndDate
 {
-	[self.timerLabel setTitle:[self timeLeft:nil]];
-	[self.countdownLabel setStringValue:[self timeLeft:nil]];
+	return [[NSCalendar currentCalendar] dateByAddingUnit:NSCalendarUnitYear value:1 toDate:[NSDate date] options:0];
+	
 }
-
-
--(NSString*)intFormat:(int)rawInt
+-(NSString*) defaultEndMessage
 {
-	if (rawInt > 9) {
-		return [NSString stringWithFormat:@"%d", rawInt];
-	}
-	else{
-		return [NSString stringWithFormat:@"%d%d", 0, rawInt];
-	}
-}
--(void) initDefaultEndDate
-{
-	@autoreleasepool {
-		NSDateComponents *dateComponent = [[NSDateComponents alloc] init];
-		[dateComponent setYear:2014];
-		[dateComponent setMonth:8];
-		[dateComponent setDay:30];
-		[dateComponent setHour:9];
-		[dateComponent setMinute:0];
-		[dateComponent setSecond:0];
-		NSCalendar *cal1 = [NSCalendar currentCalendar];
-		_endDate = [cal1 dateFromComponents:dateComponent];
-		
-		
-	}
-}
--(NSString*) getDefaultEndMessage
-{
-	return @"Freedom!";
+	return @"One Year Finished!";
 }
 
 

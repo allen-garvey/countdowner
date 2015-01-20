@@ -10,8 +10,9 @@
 
 @interface AGEDCountdowner : NSObject
 
+//used as method for selector in nstimer
 -(void) displayTimer: (NSTimer *)t;
--(void)displayTimer;
+
 -(NSString*) timeLeft:(NSTimer *)t;
 
 @property (weak, nonatomic) IBOutlet NSMenuItem *timerLabel;

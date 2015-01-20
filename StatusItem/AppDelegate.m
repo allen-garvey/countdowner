@@ -17,20 +17,48 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
+@synthesize window = _window; //deleting this breaks the build for some reason
 @synthesize menu = _menu;
 
 
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+{
+	//sets up status bar appearance
+	statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+	statusItem.button.title = @"Ω";
+	statusItem.menu = self.menu;
+	statusItem.highlightMode = YES;
+	
+	//initializes counter
+	_counter = [AGEDCountdowner new];
+	
+	NSDictionary *prefDic = [self preferencesDictionaryFromFile];
+	if(prefDic){
+		[_counter setEndMessage:[prefDic objectForKey:[self endMessagePreferencesKey]]];
+		[_counter setEndDate:[self NSDateDescriptionToDate:[prefDic objectForKey:[self endDatePreferencesKey]]]];
+	}
+	else{
+		//save counter defaults to file
+		[self savePreferencesDictionaryToFile:[_counter endDate] message:[_counter endMessage]];
+	}
+	
+	[_counter setTimerLabel:self.timerText];
+	[_counter setCountdownLabel:self.countdownLabel];
+	[_counter displayTimer:nil]; //used so that display is not blank for first second before timer kicks in
+	__unused NSTimer *countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:_counter selector:@selector(displayTimer:) userInfo:nil repeats:true];
+	[_countdownWindow setBackgroundColor:[NSColor whiteColor]];
+	
+}
+
+#pragma mark - Button Action Methods
+
 - (IBAction)updateButtonAction:(id)sender {
 	[_counter setEndDate:_editDateField.dateValue];
-	[_counter.timer invalidate];
-	
-	__unused NSTimer *countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:_counter selector:@selector(displayTimer:) userInfo:nil repeats:true];
-
-	[self saveNSStringtoFile:[_counter.endDate description] type:@"endDate"];
-	
 	[_counter setEndMessage:_endMessageTextField.stringValue];
-	[self saveNSStringtoFile:_endMessageTextField.stringValue type:@"endMessage"];
+	__unused NSTimer *countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:_counter selector:@selector(displayTimer:) userInfo:nil repeats:true];
+	
+	[self savePreferencesDictionaryToFile:[_counter endDate] message:[_counter endMessage]];
+	
 	[_preferencesWindow setIsVisible:NO];
 	
 }
@@ -41,44 +69,20 @@
 }
 
 - (IBAction)launchDetailWindow:(id)sender {
-	[_countdownWindow setIsVisible:true];
+	[_countdownWindow setIsVisible:YES];
+	[_countdownWindow makeMainWindow];
 }
 - (IBAction)launchAboutWindow:(id)sender {
-	[_aboutWindow setIsVisible:true];
+	[_aboutWindow setIsVisible:YES];
+	[_countdownWindow makeMainWindow];
 }
 
 
 - (IBAction)editEndDate:(id)sender {
-
-	[_preferencesWindow setIsVisible:true];
 	[_editDateField setDateValue:_counter.endDate];
 	[_endMessageTextField setStringValue:_counter.endMessage];
-}
-
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{	
-	statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-	statusItem.button.title = @"Ω";
-	statusItem.menu = self.menu;
-	statusItem.highlightMode = YES;
-	
-	_counter = [AGEDCountdowner new];
-	
-	NSString *savedDate = [self StringFromFile:@"endDate"];
-	if (savedDate != nil) {
-		[_counter setEndDate:[self NSDateDescriptionToDate:savedDate]];
-	}
-	
-	NSString *savedEndMessage = [self StringFromFile:@"endMessage"];
-	if (savedEndMessage != nil) {
-		[_counter setEndMessage:savedEndMessage];
-	}
-	
-	[_counter setTimerLabel:self.timerText];
-	[_counter setCountdownLabel:self.countdownLabel];
-	[_counter displayTimer];
-	__unused NSTimer *countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:_counter selector:@selector(displayTimer:) userInfo:nil repeats:true];
-	[_countdownWindow setBackgroundColor:[NSColor whiteColor]];
+	[_preferencesWindow setIsVisible:YES];
+	[_preferencesWindow makeMainWindow];
 	
 }
 
@@ -87,6 +91,8 @@
 	
 }
 
+#pragma mark - Save and Get Preferences from file methods
+
 - (NSDate*)NSDateDescriptionToDate:(NSString*)dateDescription
 {
 	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init];
@@ -94,69 +100,58 @@
 	return [dateFormatter dateFromString:dateDescription];
 }
 
-- (void)saveNSStringtoFile:(NSString*)str type:(NSString*)type
-{
+-(void)savePreferencesDictionaryToFile:(NSDate *)date message:(NSString *)message{
+	NSDictionary * prefDic = @{[self endMessagePreferencesKey] : message, [self endDatePreferencesKey] : [date description]};
+	
 	NSString *directory = [self getDirectory];
 	NSFileManager *fm = [NSFileManager defaultManager];
 	[fm changeCurrentDirectoryPath:directory];
 	
 	// Create a new directory
-	if ([fm createDirectoryAtPath: @"countdowner" withIntermediateDirectories: YES attributes: nil error: NULL] == NO) {
-		NSLog (@"Couldn't create directory!");
+	NSError * dirError;
+	if ([fm createDirectoryAtPath: [self preferencesDirName] withIntermediateDirectories: YES attributes: nil error: &dirError] == NO) {
+		NSLog (@"Couldn't create %@ directory! %@", [self preferencesDirName], [dirError localizedDescription]);
 	}
 	
-	NSString * path;
-	if ([type isEqualToString:@"endDate"]) {
-		path = [self getEndDatePath];
-	}
-	else{
-		path = [self getEndMessagePath];
-	}
-	
-	NSError *error;
-	
-	bool file_write =  [str writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&error];
+	bool file_write =  [prefDic writeToFile:[NSString stringWithFormat:@"%@/%@", [self preferencesDirName],[self preferencesFileName]] atomically:YES];
 	if (!file_write) {
-		NSLog(@"writing %@ failed: %@", path, [error localizedDescription]);
+		NSLog(@"writing %@ failed", [self preferencesFileName]);
 	}
 }
 
-- (NSString*)StringFromFile:(NSString*)type
-{
-	NSString * path;
-	if ([type isEqualToString:@"endDate"]) {
-		path = [self getEndDatePath];
-	}
-	else{
-		path = [self getEndMessagePath];
-	}
+-(NSDictionary *)preferencesDictionaryFromFile{
+	NSString *path = [NSString stringWithFormat:@"%@/%@/%@", [self getDirectory], [self preferencesDirName], [self preferencesFileName]];
 	
-	NSError *error;
-	NSString *str = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-	if (!str) {
-		NSLog(@"read of %@ failed: %@", path, [error localizedDescription]);
+	NSDictionary* prefDic = [[NSDictionary alloc] initWithContentsOfFile:path];
+	if (!prefDic) {
+		NSLog(@"read of %@ failed", path);
 	}
-	return str;
-
+	return prefDic;
 }
 
-- (NSString*)getEndDatePath
-{
-	return [NSString stringWithFormat:@"%@/countdowner/countdowner.txt", [self getDirectory]];
-}
 
-- (NSString*)getEndMessagePath
-{
-	return [NSString stringWithFormat:@"%@/countdowner/message.txt", [self getDirectory]];
-}
+#pragma mark - File Name Constants
 
 - (NSString*)getDirectory
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-	
 	return paths[0];
-	
-	
+}
+
+-(NSString *)endMessagePreferencesKey{
+	return @"endMessageKey";
+}
+
+-(NSString *)endDatePreferencesKey{
+	return @"endDateKey";
+}
+
+-(NSString *)preferencesFileName{
+	return @"preferences.xml";
+}
+
+-(NSString *)preferencesDirName{
+	return @"countdowner";
 }
 
 @end

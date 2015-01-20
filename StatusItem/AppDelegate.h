@@ -12,7 +12,7 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSWindow *window; //deleting this breaks the build for some reason
 
 @property (weak) IBOutlet NSMenu *menu;
 
@@ -29,6 +29,7 @@
 @property (unsafe_unretained) IBOutlet NSWindow *aboutWindow;
 
 @property (weak) IBOutlet NSTextField *endMessageTextField;
+
 
 
 @end
