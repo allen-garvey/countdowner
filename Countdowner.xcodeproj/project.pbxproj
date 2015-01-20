@@ -408,6 +408,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StatusItem/Countdowner-Prefix.pch";
 				INFOPLIST_FILE = "StatusItem/Countdowner-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Countdowner;
 				WRAPPER_EXTENSION = app;
 			};
@@ -423,6 +424,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StatusItem/Countdowner-Prefix.pch";
 				INFOPLIST_FILE = "StatusItem/Countdowner-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = Countdowner;
 				WRAPPER_EXTENSION = app;
 			};
