@@ -19,6 +19,7 @@
 		6477CEAC19449F1F005F6A85 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6477CE8B19449F1F005F6A85 /* Cocoa.framework */; };
 		6477CEB419449F1F005F6A85 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6477CEB219449F1F005F6A85 /* InfoPlist.strings */; };
 		6477CEB619449F1F005F6A85 /* StatusItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6477CEB519449F1F005F6A85 /* StatusItemTests.m */; };
+		64E926F31A721A6D000211E5 /* AGEDCountdownerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64E926F21A721A6D000211E5 /* AGEDCountdownerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		6477CEB319449F1F005F6A85 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6477CEB519449F1F005F6A85 /* StatusItemTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StatusItemTests.m; sourceTree = "<group>"; };
 		649DCEDA19587A67003E9D92 /* Countdowner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Countdowner.entitlements; sourceTree = "<group>"; };
+		64E926F11A721A6D000211E5 /* AGEDCountdownerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGEDCountdownerController.h; sourceTree = "<group>"; };
+		64E926F21A721A6D000211E5 /* AGEDCountdownerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGEDCountdownerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 				6477CE9E19449F1F005F6A85 /* AppDelegate.m */,
 				642A3C371A6DF3B200A0BB11 /* AGEDCountdowner.h */,
 				642A3C381A6DF3B200A0BB11 /* AGEDCountdowner.m */,
+				64E926F11A721A6D000211E5 /* AGEDCountdownerController.h */,
+				64E926F21A721A6D000211E5 /* AGEDCountdownerController.m */,
 				6477CEA019449F1F005F6A85 /* MainMenu.xib */,
 				6477CEA319449F1F005F6A85 /* Images.xcassets */,
 				6477CE9219449F1F005F6A85 /* Supporting Files */,
@@ -271,6 +276,7 @@
 				6477CE9F19449F1F005F6A85 /* AppDelegate.m in Sources */,
 				642A3C391A6DF3B200A0BB11 /* AGEDCountdowner.m in Sources */,
 				6477CE9819449F1F005F6A85 /* main.m in Sources */,
+				64E926F31A721A6D000211E5 /* AGEDCountdownerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

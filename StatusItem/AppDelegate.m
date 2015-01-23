@@ -32,6 +32,7 @@
 
 #import "AppDelegate.h"
 #include "AGEDCountdowner.h"
+#include "AGEDCountdownerController.h"
 
 @interface AppDelegate ()
 {
@@ -56,24 +57,12 @@
 	statusItem.menu = self.menu;
 	statusItem.highlightMode = YES;
 	
-	//initializes counter
-	_counter = [AGEDCountdowner new];
+	//initialize model controller
+	_countdownerController = [AGEDCountdownerController new];
+	[_countdownerController loadAndInitializeCountdownerWithDelegate:self];
 	
-	NSDictionary *prefDic = [self preferencesDictionaryFromFile];
-	if(prefDic){
-		[_counter setEndMessage:[prefDic objectForKey:[self endMessagePreferencesKey]]];
-		[_counter setEndDate:[self NSDateDescriptionToDate:[prefDic objectForKey:[self endDatePreferencesKey]]]];
-	}
-	else{
-		//save counter defaults to file
-		[self savePreferencesDictionaryToFile:[_counter endDate] message:[_counter endMessage]];
-	}
-	
-	[_counter setDelegate:self];
-	[_counter displayTimer:nil]; //used so that display is not blank for first second before timer kicks in
-	__unused NSTimer *countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:_counter selector:@selector(displayTimer:) userInfo:nil repeats:true];
-	[_countdownWindow setBackgroundColor:[NSColor whiteColor]];
-	
+	//start timer
+	[_countdownerController startCountdowner];
 }
 
 #pragma mark - AGEDCountdowner Delegate Method
@@ -81,18 +70,13 @@
 -(void)updateTimeDisplays:(NSString *)timeLeft{
 	[_timerText setTitle:timeLeft];
 	[_countdownLabel setStringValue:timeLeft];
+	NSLog(@"timer displayed");
 }
 
 #pragma mark - Button Action Methods
 
 - (IBAction)updateButtonAction:(id)sender {
-	[[_counter timer] invalidate];
-	[_counter setEndDate:_editDateField.dateValue];
-	[_counter setEndMessage:_endMessageTextField.stringValue];
-	__unused NSTimer *countdownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:_counter selector:@selector(displayTimer:) userInfo:nil repeats:true];
-	
-	[self savePreferencesDictionaryToFile:[_counter endDate] message:[_counter endMessage]];
-	
+	[_countdownerController updateAndSaveCountdowner:_editDateField.dateValue endMessage:_endMessageTextField.stringValue];
 	[_preferencesWindow setIsVisible:NO];
 	
 }
@@ -113,8 +97,9 @@
 
 
 - (IBAction)editEndDate:(id)sender {
-	[_editDateField setDateValue:_counter.endDate];
-	[_endMessageTextField setStringValue:_counter.endMessage];
+	AGEDCountdowner *counter = [_countdownerController counter];
+	[_editDateField setDateValue:counter.endDate];
+	[_endMessageTextField setStringValue:counter.endMessage];
 	[_preferencesWindow setIsVisible:YES];
 	[_preferencesWindow makeMainWindow];
 	
@@ -123,69 +108,6 @@
 - (IBAction)quit:(id)sender {
 	[[NSApplication sharedApplication] terminate:nil];
 	
-}
-
-#pragma mark - Save and Get Preferences from file methods
-
-- (NSDate*)NSDateDescriptionToDate:(NSString*)dateDescription
-{
-	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc]init];
-	[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss ZZZ"];
-	return [dateFormatter dateFromString:dateDescription];
-}
-
--(void)savePreferencesDictionaryToFile:(NSDate *)date message:(NSString *)message{
-	NSDictionary * prefDic = @{[self endMessagePreferencesKey] : message, [self endDatePreferencesKey] : [date description]};
-	
-	NSString *directory = [self getDirectory];
-	NSFileManager *fm = [NSFileManager defaultManager];
-	[fm changeCurrentDirectoryPath:directory];
-	
-	// Create a new directory
-	NSError * dirError;
-	if ([fm createDirectoryAtPath: [self preferencesDirName] withIntermediateDirectories: YES attributes: nil error: &dirError] == NO) {
-		NSLog (@"Couldn't create %@ directory! %@", [self preferencesDirName], [dirError localizedDescription]);
-	}
-	
-	bool file_write =  [prefDic writeToFile:[NSString stringWithFormat:@"%@/%@", [self preferencesDirName],[self preferencesFileName]] atomically:YES];
-	if (!file_write) {
-		NSLog(@"writing %@ failed", [self preferencesFileName]);
-	}
-}
-
--(NSDictionary *)preferencesDictionaryFromFile{
-	NSString *path = [NSString stringWithFormat:@"%@/%@/%@", [self getDirectory], [self preferencesDirName], [self preferencesFileName]];
-	
-	NSDictionary* prefDic = [[NSDictionary alloc] initWithContentsOfFile:path];
-	if (!prefDic) {
-		NSLog(@"read of %@ failed", path);
-	}
-	return prefDic;
-}
-
-
-#pragma mark - File Name Constants
-
-- (NSString*)getDirectory
-{
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-	return paths[0];
-}
-
--(NSString *)endMessagePreferencesKey{
-	return @"endMessageKey";
-}
-
--(NSString *)endDatePreferencesKey{
-	return @"endDateKey";
-}
-
--(NSString *)preferencesFileName{
-	return @"preferences.xml";
-}
-
--(NSString *)preferencesDirName{
-	return @"countdowner";
 }
 
 @end

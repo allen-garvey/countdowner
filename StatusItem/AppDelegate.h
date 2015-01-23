@@ -32,27 +32,26 @@
 
 #import <Cocoa/Cocoa.h>
 #import "AGEDCountdowner.h"
+#import "AGEDCountdownerController.h"
 
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, AGEDCountdownerDelegate>
 
+//IB view objects
 @property (assign) IBOutlet NSWindow *window; //deleting this breaks the build for some reason
-
 @property (weak) IBOutlet NSMenu *menu;
-
-- (IBAction)quit:(id)sender;
-
 @property (weak) IBOutlet NSMenuItem *timerText;
-
 @property (unsafe_unretained) IBOutlet NSWindow *preferencesWindow;
-@property (strong) AGEDCountdowner *counter;
 @property (weak) IBOutlet NSDatePicker *editDateField;
-
 @property (unsafe_unretained) IBOutlet NSWindow *countdownWindow;
 @property (weak) IBOutlet NSTextField *countdownLabel;
 @property (unsafe_unretained) IBOutlet NSWindow *aboutWindow;
-
 @property (weak) IBOutlet NSTextField *endMessageTextField;
+
+//controller for model
+@property(strong, nonatomic)AGEDCountdownerController * countdownerController;
+
+//AGEDCountdownerDelegate Methods
 -(void)updateTimeDisplays:(NSString *)timeLeft;
 
 
