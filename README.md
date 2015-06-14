@@ -6,12 +6,7 @@ Countdowner is a native Mac OSX status bar application that shows you just how f
 
 1. Download the Countdowner project files.
 
-2. 
-  - Drag the Countdowner.app file from the main folder to your application folder and double click to run (you may have to change your Mac settings by going into Settings->Security & Privacy->General->Allow apps downloaded from: Anywhere).
-
-  ####OR
-
-  - Compile the project yourself by opening it in Xcode (free download from the Appstore required) and going to Product->Archive->Export.
+2. Compile the project by opening it in Xcode (free download from the Appstore required) and going to Product->Archive->Export.
 
 3. If you see an Ω symbol in your status bar (upper right hand corner of your screen), Countdowner is running. You can configure it by clicking on the icon.
 
@@ -21,7 +16,7 @@ Countdowner is a native Mac OSX status bar application that shows you just how f
 - Should also work on OSX 10.9 and 10.8, but this has not been recently tested and so is not officially supported
 - May also work on older versions of OSX, but this is not officially supported
 - Sandboxed to minimize potential malicious activity
-- Dependencies - none (Xcode required if you want to compile it yourself)
+- Dependencies - Xcode
 
 ##License
 
